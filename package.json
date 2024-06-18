@@ -9,8 +9,8 @@
   "main": "index.js",
   "scripts": {
     "build:all": "nx run-many --target=build --all",
-    "publish:buttons": "nx release --projects @taki_layer/buttons",
-    "publish:forms": "nx release --projects @taki_layer/forms"
+    "publish:buttons": "nx release publish --projects @taki_layer/buttons",
+    "publish:forms": "nx release publish --projects @taki_layer/forms"
   },
   "keywords": [],
   "author": "",
