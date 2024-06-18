@@ -58,7 +58,8 @@ jobs:
       - name: Publish buttons package
         run: |
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-          cd packages/forms
+          pwd 
+          cd ./packages/forms
           npm run publish:forms
   
   release-forms:
