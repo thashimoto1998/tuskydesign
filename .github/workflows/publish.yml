@@ -59,8 +59,9 @@ jobs:
         run: |
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
           pwd 
-          cd ./packages/forms
-          npm run publish:forms
+          ls
+          cd ./packages/buttons
+          npm run publish:buttons
   
   release-forms:
     if: contains(github.ref, 'tags/forms')
