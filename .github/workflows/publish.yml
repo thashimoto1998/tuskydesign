@@ -56,7 +56,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PACKAGE_MANAGER: npm
       - name: Publish buttons package
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc && npm run publish:buttons
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          cd packages/forms
+          npm run publish:forms
   
   release-forms:
     if: contains(github.ref, 'tags/forms')
