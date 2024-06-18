@@ -41,14 +41,15 @@ jobs:
         if: steps.cache_node_modules.outputs.cache-hit != 'true'
         run: npm install
 
-      - name: Build
-        run: npm run build:all
-
   release-buttons:
     if: contains(github.ref, 'tags/buttons')
     needs: setup
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Build
+        run: npm run build:all
       - name: Check if package version can be published
         uses: technote-space/package-version-check-action@v1
         with:
@@ -56,12 +57,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PACKAGE_MANAGER: npm
       - name: Publish buttons package
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-          pwd 
-          ls
-          cd ./packages/buttons
-          npm run publish:buttons
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc && npm run publish:buttons
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
   
   release-forms:
     if: contains(github.ref, 'tags/forms')
