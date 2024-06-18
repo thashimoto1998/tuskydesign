@@ -70,6 +70,7 @@ jobs:
   
   release-forms:
     if: contains(github.ref, 'tags/forms')
+    needs: setup
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -96,6 +97,7 @@ jobs:
 
   release-all:
     if: contains(github.ref, 'tags/all')
+    needs: setup
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
