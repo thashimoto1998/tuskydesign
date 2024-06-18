@@ -1,7 +1,10 @@
 {
-  "name": "@tuskdesign/buttons",
-  "version": "1.2.0",
+  "name": "@taki_layer/buttons",
+  "version": "6.2.1",
   "description": "",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
