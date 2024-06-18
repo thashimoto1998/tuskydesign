@@ -73,8 +73,8 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc && npm run publish:forms
 
   release-all:
-   if: cotains(github.ref, 'tags/all')
-   needs: setup
+    if: contains(github.ref, 'tags/all')
+    needs: setup
     runs-on: ubuntu-latest
     steps:
       - name: Check if buttons package version can be published
@@ -93,9 +93,3 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc && npm run publish:buttons
       - name: Publish forms package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc && npm run publish:forms
-
-
-
-
-      
-    
