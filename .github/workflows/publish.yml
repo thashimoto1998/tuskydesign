@@ -15,12 +15,12 @@ env:
   node-version: '20.x'
 
 jobs:
-  setup:
+  release-buttons:
+    if: contains(github.ref, 'tags/buttons')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
       - name: Setup node
         uses: actions/setup-node@v3
         with:
@@ -28,7 +28,6 @@ jobs:
           node-version: ${{ env.node-version }}
           registry-url: "https://registry.npmjs.org"
           always-auth: true
-
       - name: Cache node_modules
         uses: actions/cache@v2
         id: cache_node_modules
@@ -40,14 +39,6 @@ jobs:
       - name: Install dependencies
         if: steps.cache_node_modules.outputs.cache-hit != 'true'
         run: npm install
-
-  release-buttons:
-    if: contains(github.ref, 'tags/buttons')
-    needs: setup
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
       - name: Build
         run: npm run build:all
       - name: Check if package version can be published
@@ -63,7 +54,6 @@ jobs:
   
   release-forms:
     if: contains(github.ref, 'tags/forms')
-    needs: setup
     runs-on: ubuntu-latest
     steps:
       - name: Check if package version can be published
@@ -77,7 +67,6 @@ jobs:
 
   release-all:
     if: contains(github.ref, 'tags/all')
-    needs: setup
     runs-on: ubuntu-latest
     steps:
       - name: Check if buttons package version can be published
